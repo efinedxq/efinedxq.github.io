@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>efinedxq</title>
+<title>LeetCode_problem_3_Longest_Substring_Without_Repeating_Characters | efinedxq</title>
 
 
     <link rel="alternate" href="/atom.xml" title="efinedxq" type="application/atom+xml">
@@ -122,41 +122,16 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <div class="carousel">
-    <img src="/img/head-img.jpg">
-</div>
-
-
-
-
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
 <article class="post">
-    
-        <div class="post-media">
-            <a href="/题解/LeetCode/LeetCode-problem-4-Median-of-Two-Sorted-Arrays/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="/img/efinedxq_img6.jpg"   alt="LeetCode_problem_4_Median_of_Two_Sorted_Arrays"> 
-            </a>
-        </div>
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/题解/LeetCode/LeetCode-problem-4-Median-of-Two-Sorted-Arrays/">LeetCode_problem_4_Median_of_Two_Sorted_Arrays</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年01月19日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            问题描述There are two sorted arrays nums1 and nums2 of size m and n respectively.
-Find the median of the two sorted array...
-        </p> 
-    </div>
-    <footer class="post-footer clearfix">
-        <div class="pull-left tag-list">
-            <div class="post-meta">
+    <div class="post-head">
+        <h1 id="LeetCode_problem_3_Longest_Substring_Without_Repeating_Characters">
+            
+	            LeetCode_problem_3_Longest_Substring_Without_Repeating_Characters
+            
+        </h1>
+        <div class="post-meta">
     
     
     <span class="categories-meta fa-wrap">
@@ -181,315 +156,83 @@ Find the median of the two sorted array...
     </span>
 </div>
 
-        </div>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>   Given a string, find the length of the longest substring without repeating characters.<br>      （找出最长的没有重复字母出现的子串。输出其最长长度。）</p>
+<hr>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>   Given “abcabcbb”, the answer is “abc”, which the length is 3.</p>
+<p>  Given “bbbbb”, the answer is “b”, with the length of 1.</p>
+<p>  Given “pwwkew”, the answer is “wke”, with the length of 3. Note that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
+<hr>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>有一个结论只要重复出现，index之前的东西就失去了作用，只用记录index之后的字符。</li>
+<li>如果不是重复字符， index==-1 ,那么就让max++;</li>
+<li>如果不是重复字符，index!=-1，就比较记录max。不能直接max++，也不能直接max=i-index; 例如：abcaad</li>
+<li>如果出现重复，并且是在index之后出现，给记录，再比较max</li>
+<li>如果出现重复，在index之前出现，比较记录max</li>
+</ol>
+<hr>
+<h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3><pre><code>&quot;abcabcss&quot;  4
+&quot;aaaaa&quot;   1
+&quot;qwwwejw&quot;  3
+&quot;abcade&quot;  5
+&quot;abba&quot; 2  index之前的就不算了 
+&quot;ohomm&quot;  3
+&quot;tmmzuxt&quot; 5 因为t出现过，所以return的判断还是有必要的
+&quot;alouzxilkaxkufsu&quot;  8
+</code></pre><hr>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">-1</span>;  <span class="comment">//每遇到重复值，就记录下其第一次出现的下标</span></span><br><span class="line">		<span class="keyword">int</span> max = <span class="number">0</span>, len = s.size();  <span class="comment">//max记录当前最长</span></span><br><span class="line">		<span class="keyword">int</span> mapping[<span class="number">200</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">		<span class="keyword">int</span> val;  <span class="comment">// 记录字符</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i ++)&#123;</span><br><span class="line">			val = s[i];</span><br><span class="line">			<span class="comment">//如果出现过，并且是在index之后出现，给记录</span></span><br><span class="line">		    <span class="keyword">if</span>(mapping[val]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span>(index &lt;= mapping[val]<span class="number">-1</span>)&#123;</span><br><span class="line">					index = mapping[val]<span class="number">-1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">		        max = max&gt;=i-index?max:i-index;</span><br><span class="line">		    &#125;</span><br><span class="line">			<span class="comment">//if(index==-1) max++;</span></span><br><span class="line">		    <span class="comment">//</span></span><br><span class="line">			<span class="keyword">if</span>(mapping[val]&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">if</span>(index==<span class="number">-1</span>) max++;</span><br><span class="line">				<span class="keyword">else</span>&#123;</span><br><span class="line">					max = max&gt;=i-index?max:i-index;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;index&lt;&lt;<span class="string">" "</span>&lt;&lt;max&lt;&lt;<span class="string">" "</span>&lt;&lt;val&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		    mapping[val] = i+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(index == <span class="number">-1</span>) <span class="keyword">return</span> max;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> max&gt;=len-index<span class="number">-1</span>?max:len-index<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>改进版</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> index = <span class="number">0</span>;  <span class="comment">//每遇到重复值，就记录下其第一次出现的下标</span></span><br><span class="line">	<span class="keyword">int</span> max = <span class="number">0</span>, len = s.size();  <span class="comment">//max记录当前最长</span></span><br><span class="line">	<span class="keyword">int</span> mapping[<span class="number">200</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span> val;  <span class="comment">// 记录字符</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i ++)&#123;</span><br><span class="line">		val = s[i];</span><br><span class="line">	    index = mapping[val]&gt;index?mapping[val]:index;</span><br><span class="line">		max = max&gt;i-index+<span class="number">1</span>?max:i-index+<span class="number">1</span>;</span><br><span class="line">		mapping[val] = i+<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> max;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><pre><code>ASCII码
+&apos;a&apos; 97     &apos;A&apos;  65   &apos;0&apos; 48
+&apos;z&apos; 122    &apos;Z&apos;  90   &apos;9&apos; 57
+</code></pre>
+    </div>
 
-        <div class="post-permalink"> 
-            <a href="/题解/LeetCode/LeetCode-problem-4-Median-of-Two-Sorted-Arrays/" class="btn btn-default">阅读全文</a>
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">efinedxq</a>
+            
         </div>
-    </footer>
+        <div>
+            
+        </div>  
+    </div>
 </article>
 
-
-<article class="post">
+<div class="article-nav prev-next-wrap clearfix">
     
-        <div class="post-media">
-            <a href="/题解/LeetCode/LeetCode-problem-3-Longest-Substring-Without-Repeating-Characters/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="/img/efinedxq_img6.jpg"   alt="LeetCode_problem_3_Longest_Substring_Without_Repeating_Characters"> 
-            </a>
-        </div>
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/题解/LeetCode/LeetCode-problem-3-Longest-Substring-Without-Repeating-Characters/">LeetCode_problem_3_Longest_Substring_Without_Repeating_Characters</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年01月19日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            问题描述   Given a string, find the length of the longest substring without repeating characters.      （找出最长的没有重复字母出现的子串。...
-        </p> 
-    </div>
-    <footer class="post-footer clearfix">
-        <div class="pull-left tag-list">
-            <div class="post-meta">
+        <a href="/题解/LeetCode/LeetCode-problem-4-Median-of-Two-Sorted-Arrays/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
     
     
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <span>LeetCode</span>
-    </span>
+        <a href="/题解/LeetCode/LeetCode-problem-2-Add-Two-Numbers/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
     
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            leetcode
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2018/01/19</span>
-    </span>
 </div>
 
-        </div>
 
-        <div class="post-permalink"> 
-            <a href="/题解/LeetCode/LeetCode-problem-3-Longest-Substring-Without-Repeating-Characters/" class="btn btn-default">阅读全文</a>
-        </div>
-    </footer>
-</article>
-
-
-<article class="post">
-    
-        <div class="post-media">
-            <a href="/题解/LeetCode/LeetCode-problem-2-Add-Two-Numbers/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="/img/efinedxq_img6.jpg"   alt="LeetCode_problem_2_Add_Two_Numbers"> 
-            </a>
-        </div>
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/题解/LeetCode/LeetCode-problem-2-Add-Two-Numbers/">LeetCode_problem_2_Add_Two_Numbers</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年01月19日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            问题描述You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse...
-        </p> 
-    </div>
-    <footer class="post-footer clearfix">
-        <div class="pull-left tag-list">
-            <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <span>LeetCode</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            leetcode
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2018/01/19</span>
-    </span>
+    <div id="comments">
+        
+	
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzA1MS85NjEz">
+  <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+         if (typeof LivereTower === 'function') { return; }
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+  </script>
 </div>
 
-        </div>
 
-        <div class="post-permalink"> 
-            <a href="/题解/LeetCode/LeetCode-problem-2-Add-Two-Numbers/" class="btn btn-default">阅读全文</a>
-        </div>
-    </footer>
-</article>
-
-
-<article class="post">
-    
-        <div class="post-media">
-            <a href="/题解/LeetCode/LeetCode-problem-1-two-sum/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="/img/efinedxq_img5.jpg"   alt="LeetCode_problem_1_two_sum"> 
-            </a>
-        </div>
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/题解/LeetCode/LeetCode-problem-1-two-sum/">LeetCode_problem_1_two_sum</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年01月19日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            Description
-Given an array of integers, return indices of the two numbers suchthat they add up to a specific target.
-...
-        </p> 
     </div>
-    <footer class="post-footer clearfix">
-        <div class="pull-left tag-list">
-            <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <span>LeetCode</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            leetcode
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2018/01/19</span>
-    </span>
-</div>
-
-        </div>
-
-        <div class="post-permalink"> 
-            <a href="/题解/LeetCode/LeetCode-problem-1-two-sum/" class="btn btn-default">阅读全文</a>
-        </div>
-    </footer>
-</article>
-
-
-<article class="post">
-    
-        <div class="post-media">
-            <a href="/hello/你好，Hexo/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="/img/efinedxq_img4.jpg"   alt="Hexo博客添加图片、音乐、视频"> 
-            </a>
-        </div>
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/hello/你好，Hexo/">Hexo博客添加图片、音乐、视频</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年01月18日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            　1.　插入外部链接图片
- 1![“图片描述”](“图片地址”)
-　2. 添加本地图片
-
-在\hexo\source目录下新建文件夹，命名为images或者其他你喜欢的名字，然后编辑你的md博文，插入下面的代码样式： 1![“图片描述...
-        </p> 
-    </div>
-    <footer class="post-footer clearfix">
-        <div class="pull-left tag-list">
-            <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <span>hello</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            hello
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2018/01/18</span>
-    </span>
-</div>
-
-        </div>
-
-        <div class="post-permalink"> 
-            <a href="/hello/你好，Hexo/" class="btn btn-default">阅读全文</a>
-        </div>
-    </footer>
-</article>
-
-
-<article class="post">
-    
-        <div class="post-media">
-            <a href="/测试/hello/java/hello-world/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="/img/efinedxq_img6.jpg"   alt="Hello World"> 
-            </a>
-        </div>
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/测试/hello/java/hello-world/">Hello World</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年01月17日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using ...
-        </p> 
-    </div>
-    <footer class="post-footer clearfix">
-        <div class="pull-left tag-list">
-            <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <span>java</span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            测试
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2018/01/17</span>
-    </span>
-</div>
-
-        </div>
-
-        <div class="post-permalink"> 
-            <a href="/测试/hello/java/hello-world/" class="btn btn-default">阅读全文</a>
-        </div>
-    </footer>
-</article>
-
 
 
 

@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>分类: java | efinedxq</title>
+<title>LeetCode_problem_2_Add_Two_Numbers | efinedxq</title>
 
 
     <link rel="alternate" href="/atom.xml" title="efinedxq" type="application/atom+xml">
@@ -122,36 +122,98 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <h3> 
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="LeetCode_problem_2_Add_Two_Numbers">
+            
+	            LeetCode_problem_2_Add_Two_Numbers
+            
+        </h1>
+        <div class="post-meta">
     
-        java 
     
-</h3>
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>LeetCode</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            leetcode
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/01/19</span>
+    </span>
+</div>
 
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/测试/hello/java/hello-world/">Hello World</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2018年01月17日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using ...
-            </p> 
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+<blockquote>
+<p>假定两个数都不是0开头，除了数本身就是0。</p>
+</blockquote>
+<hr>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>Output: 7 -&gt; 0 -&gt; 8<br>Explanation: 342 + 465 = 807.</p>
+<hr>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>题目没什么难点，就是链表的顺序遍历问题。注意进位就行了，可能最后有一个进位要再创建一个节点，不要漏掉。</p>
+<hr>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  C++ 代码</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        <span class="function">ListNode <span class="title">head</span><span class="params">(<span class="number">-1</span>)</span></span>;</span><br><span class="line">		<span class="keyword">int</span> f = <span class="number">0</span>; <span class="comment">//标识进位</span></span><br><span class="line">		ListNode* pre = &amp;head;</span><br><span class="line">		ListNode* pa = l1, *pb = l2;</span><br><span class="line">		<span class="keyword">int</span> val = <span class="number">0</span>, a, b;</span><br><span class="line">		<span class="keyword">while</span>(pa!=<span class="literal">nullptr</span>||pb!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">           </span><br><span class="line">		   a = pa == <span class="literal">nullptr</span>?<span class="number">0</span>:pa-&gt;val;</span><br><span class="line">		   b = pb == <span class="literal">nullptr</span>?<span class="number">0</span>:pb-&gt;val;</span><br><span class="line">		   val = a + b + f;</span><br><span class="line">		   f = val / <span class="number">10</span>;</span><br><span class="line">		   val = val % <span class="number">10</span>;</span><br><span class="line">		   </span><br><span class="line">		   pre-&gt;next = <span class="keyword">new</span> ListNode(val);</span><br><span class="line">		   </span><br><span class="line">           pa=pa==<span class="literal">nullptr</span>?<span class="literal">nullptr</span>:pa-&gt;next;</span><br><span class="line">           pb=pb==<span class="literal">nullptr</span>?<span class="literal">nullptr</span>:pb-&gt;next;</span><br><span class="line">           pre = pre-&gt;next;		   </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//最后判断是否有进位</span></span><br><span class="line">		<span class="keyword">if</span>(f&gt;<span class="number">0</span>)&#123;</span><br><span class="line">		  pre-&gt;next = <span class="keyword">new</span> ListNode(f);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> head.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">efinedxq</a>
+            
         </div>
-    </article>
- 
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/题解/LeetCode/LeetCode-problem-3-Longest-Substring-Without-Repeating-Characters/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/题解/LeetCode/LeetCode-problem-1-two-sum/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
 
 
+    <div id="comments">
+        
+	
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzA1MS85NjEz">
+  <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+         if (typeof LivereTower === 'function') { return; }
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+  </script>
+</div>
 
 
+    </div>
 
 
 

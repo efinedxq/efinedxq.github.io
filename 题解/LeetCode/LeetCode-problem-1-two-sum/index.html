@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>分类: java | efinedxq</title>
+<title>LeetCode_problem_1_two_sum | efinedxq</title>
 
 
     <link rel="alternate" href="/atom.xml" title="efinedxq" type="application/atom+xml">
@@ -122,36 +122,109 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <h3> 
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="LeetCode_problem_1_two_sum">
+            
+	            LeetCode_problem_1_two_sum
+            
+        </h1>
+        <div class="post-meta">
     
-        java 
     
-</h3>
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>LeetCode</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            leetcode
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/01/19</span>
+    </span>
+</div>
 
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/测试/hello/java/hello-world/">Hello World</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2018年01月17日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using ...
-            </p> 
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>Given an array of integers, return indices of the two numbers such<br>that they add up to a specific target.</p>
+<p>You may assume that each input would have exactly one solution, and<br>you may not use the same element twice.</p>
+</blockquote>
+<hr>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h3><blockquote>
+<p> Given nums = [2, 7, 11, 15], target = 9,<br>Because nums[0] + nums[1] = 2 + 7 = 9,<br> return [0, 1].</p>
+</blockquote>
+<hr>
+<h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3><blockquote>
+<p> 输入：3,3    6<br>输出：  0,1</p>
+<p> 输入：2,3,3    5<br> 输出： 0,1<br> 下面代码没有通过这个测试，但是A了。题目说结果是确定的，应该就是不考虑这种情况。</p>
+</blockquote>
+<hr>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>先排序，最快O(nlogn)。再左右夹逼。比较暴力。</li>
+<li>利用hash表，时间复杂度为O(n)。下面代码是基于第二种方法。 </li>
+</ol>
+<hr>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">       <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; hashMap;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.size(); i ++) hashMap[nums[i]] = i;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//cout&lt;&lt;hashMap.size()&lt;&lt;endl;</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.size(); i ++)&#123;</span><br><span class="line">		<span class="keyword">const</span> <span class="keyword">int</span> gap = target - nums[i];</span><br><span class="line">		<span class="keyword">if</span>(hashMap[gap] &gt; <span class="number">0</span>)&#123;</span><br><span class="line">			ans.push_back(i);</span><br><span class="line">			ans.push_back(hashMap[gap]);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>官方java答案</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">   Map&lt;Integer, Integer&gt; <span class="built_in">map</span> = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">       <span class="keyword">int</span> complement = target - nums[i];</span><br><span class="line">       <span class="keyword">if</span> (<span class="built_in">map</span>.containsKey(complement)) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="built_in">map</span>.get(complement), i &#125;;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="built_in">map</span>.put(nums[i], i);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No two sum solution"</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">efinedxq</a>
+            
         </div>
-    </article>
- 
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/题解/LeetCode/LeetCode-problem-2-Add-Two-Numbers/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/hello/你好，Hexo/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
 
 
+    <div id="comments">
+        
+	
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzA1MS85NjEz">
+  <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+         if (typeof LivereTower === 'function') { return; }
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+  </script>
+</div>
 
 
+    </div>
 
 
 

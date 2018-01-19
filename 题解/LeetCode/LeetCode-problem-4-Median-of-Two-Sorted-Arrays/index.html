@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="efinedxq">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://efinedxq.github.io">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>LeetCode_problem_4_Median_of_Two_Sorted_Arrays | efinedxq</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="efinedxq" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+    <div class="hide">
+    	<script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language="JavaScript"></script>
+    </div>
+
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="">
+            <img src="/img/avatar.jpg" alt="logo头像">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                 <img src="/img/branding.png" alt="Snippet 博客主题">  
+             
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation"><a href="/"><i class="fa fa-fw "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/"><i class="fa fa-fw "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/"><i class="fa fa-fw "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/"><i class="fa fa-fw "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/题解/"><i class="fa fa-fw "></i>题解</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/"><i class="fa fa-fw "></i>资源</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="LeetCode_problem_4_Median_of_Two_Sorted_Arrays">
+            
+	            LeetCode_problem_4_Median_of_Two_Sorted_Arrays
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>LeetCode</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            leetcode
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/01/19</span>
+    </span>
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>There are two sorted arrays nums1 and nums2 of size m and n respectively.</p>
+<p>Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
+<blockquote>
+<p>找中间数字。</p>
+</blockquote>
+<hr>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>Example 1:<br>nums1 = [1, 3]<br>nums2 = [2]<br>The median is 2.0</p>
+<p>Example 2:<br>nums1 = [1, 2]<br>nums2 = [3, 4]<br>The median is (2 + 3)/2 = 2.5</p>
+<hr>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>合并两个数组，然后找到中间值。这是最笨的方法。</li>
+<li>题目没有要求输出合并后的数组，所以没必要全部比较，可以记录比较的长度，只要达到中间长度就停止。</li>
+<li>进一步优化，不用辅助数组，试探性查找。</li>
+</ol>
+<hr>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">/** </span></span><br><span class="line"><span class="comment">* 将两者不完全合并，即只要合并到len长度即可。</span></span><br><span class="line"><span class="comment">* 用了一个辅助vector。 68ms</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">   <span class="function"><span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> len1 = nums1.size(), len2=nums2.size();</span><br><span class="line">	<span class="keyword">int</span> len = (len1+len2)/<span class="number">2</span>, f = (len1+len2)%<span class="number">2</span>;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tem;</span><br><span class="line">	<span class="keyword">double</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>, j= <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(i&lt;len1&amp;&amp;j&lt;len2&amp;&amp;i+j&lt;len+<span class="number">1</span>)&#123;</span><br><span class="line">	   <span class="keyword">if</span>(nums1[i]&gt;nums2[j])&#123;</span><br><span class="line">	      tem.push_back(nums2[j]);</span><br><span class="line">		  j++;</span><br><span class="line">	   &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		  tem.push_back(nums1[i]);</span><br><span class="line">		  i++;</span><br><span class="line">	   &#125;</span><br><span class="line">	   </span><br><span class="line">	   <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;j&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(i+j&lt;len+<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(i&lt;len1)&#123;</span><br><span class="line">		  tem.push_back(nums1[i]);</span><br><span class="line">		  i++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(j&lt;len2)&#123;</span><br><span class="line">		   tem.push_back(nums2[j]);</span><br><span class="line">		  j++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;j&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;j&lt;&lt;<span class="string">" "</span>&lt;&lt;len&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">if</span>(f&gt;<span class="number">0</span>)&#123;</span><br><span class="line">		ans = tem[len];</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		ans = <span class="keyword">double</span>(tem[len<span class="number">-1</span>]+tem[len])/<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">	</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>不用vector</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">* 不用vector 思路一样  但用了更长的时间  90ms</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> len1 = nums1.size(), len2=nums2.size();</span><br><span class="line">	<span class="keyword">int</span> len = (len1+len2)/<span class="number">2</span>, f = (len1+len2)%<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">double</span> ans = <span class="number">0</span>, tem = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>, j= <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(i&lt;len1&amp;&amp;j&lt;len2&amp;&amp;i+j&lt;len+<span class="number">1</span>)&#123;</span><br><span class="line">	   <span class="keyword">if</span>(nums1[i]&gt;nums2[j])&#123;</span><br><span class="line">	      <span class="keyword">if</span>(i+j==len<span class="number">-1</span>)&#123;</span><br><span class="line">			  tem = nums2[j];</span><br><span class="line">		  &#125;</span><br><span class="line">		  <span class="keyword">if</span>(i+j==len)&#123;</span><br><span class="line">			  ans = nums2[j];</span><br><span class="line">		  &#125;</span><br><span class="line">		  j++;</span><br><span class="line">	   &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		  <span class="keyword">if</span>(i+j==len<span class="number">-1</span>)&#123;</span><br><span class="line">			  tem = nums1[i];</span><br><span class="line">		  &#125;</span><br><span class="line">		  <span class="keyword">if</span>(i+j==len)&#123;</span><br><span class="line">			  ans = nums1[i];</span><br><span class="line">		  &#125;</span><br><span class="line">		  i++;</span><br><span class="line">	   &#125;</span><br><span class="line">	   </span><br><span class="line">	   <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;j&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(i+j&lt;len+<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(i&lt;len1)&#123;</span><br><span class="line">		  <span class="keyword">if</span>(i+j==len<span class="number">-1</span>)&#123;</span><br><span class="line">			  tem = nums1[i];</span><br><span class="line">		  &#125;</span><br><span class="line">		  <span class="keyword">if</span>(i+j==len)&#123;</span><br><span class="line">			  ans = nums1[i];</span><br><span class="line">		  &#125;</span><br><span class="line">		  i++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(j&lt;len2)&#123;</span><br><span class="line">		  <span class="keyword">if</span>(i+j==len<span class="number">-1</span>)&#123;</span><br><span class="line">			  tem = nums2[j];</span><br><span class="line">		  &#125;</span><br><span class="line">		  <span class="keyword">if</span>(i+j==len)&#123;</span><br><span class="line">			  ans = nums2[j];</span><br><span class="line">		  &#125;</span><br><span class="line">		  j++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;j&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;j&lt;&lt;<span class="string">" "</span>&lt;&lt;len&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">if</span>(f&gt;<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> ans;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (ans+tem)/<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><figcaption><span>进一步优化</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">*  例程，55ms</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"> <span class="function"><span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> len1 = nums1.size(), len2=nums2.size();</span><br><span class="line">    <span class="keyword">if</span>(len1&gt;len2)&#123;</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tem = nums1; nums1 = nums2; nums2=tem;</span><br><span class="line">		<span class="keyword">int</span> t = len1; len1 = len2; len2 = t;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> iMin = <span class="number">0</span>, iMax = len1, half = (len1+len2+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">while</span>(iMin &lt;= iMax)&#123;</span><br><span class="line">	   <span class="keyword">int</span> i = (iMin + iMax)/<span class="number">2</span>;</span><br><span class="line">	   <span class="keyword">int</span> j = half - i;</span><br><span class="line">	    <span class="keyword">if</span> (i &lt; iMax &amp;&amp; nums2[j<span class="number">-1</span>] &gt; nums1[i])&#123;</span><br><span class="line">               iMin = iMin + <span class="number">1</span>; <span class="comment">// i is too small</span></span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span> <span class="keyword">if</span> (i &gt; iMin &amp;&amp; nums1[i<span class="number">-1</span>] &gt; nums2[j]) &#123;</span><br><span class="line">               iMax = iMax - <span class="number">1</span>; <span class="comment">// i is too big</span></span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span> &#123; <span class="comment">// i is perfect</span></span><br><span class="line">               <span class="keyword">int</span> maxLeft = <span class="number">0</span>;</span><br><span class="line">               <span class="keyword">if</span> (i == <span class="number">0</span>) &#123; maxLeft =nums2[j<span class="number">-1</span>]; &#125;</span><br><span class="line">               <span class="keyword">else</span> <span class="keyword">if</span> (j == <span class="number">0</span>) &#123; maxLeft = nums1[i<span class="number">-1</span>]; &#125;</span><br><span class="line">               <span class="keyword">else</span> &#123; maxLeft = max(nums1[i<span class="number">-1</span>], nums2[j<span class="number">-1</span>]); &#125;</span><br><span class="line">               <span class="keyword">if</span> ( (len1 + len2) % <span class="number">2</span> == <span class="number">1</span> ) &#123; <span class="keyword">return</span> maxLeft; &#125;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">int</span> minRight = <span class="number">0</span>;</span><br><span class="line">               <span class="keyword">if</span> (i == len1) &#123; minRight = nums2[j]; &#125;</span><br><span class="line">               <span class="keyword">else</span> <span class="keyword">if</span> (j == len2) &#123; minRight = nums1[i]; &#125;</span><br><span class="line">               <span class="keyword">else</span> &#123; minRight = min(nums2[j], nums1[i]); &#125;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">return</span> (maxLeft + minRight) / <span class="number">2.0</span>;</span><br><span class="line">           &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0.0</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">efinedxq</a>
+            
+        </div>
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/题解/LeetCode/LeetCode-problem-3-Longest-Substring-Without-Repeating-Characters/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzA1MS85NjEz">
+  <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+         if (typeof LivereTower === 'function') { return; }
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+  </script>
+</div>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>主题Snippet v1.2.0版本已经上线！欢迎更新~ <br/>
+主题下载：<a href="https://github.com/shenliyang/hexo-theme-snippet" title="fork me" target="_blank">Snippet主题</a> <br/>
+<hr/>接受贡献，包括不限于提交问题与需求，修复代码。欢迎Pull Request<br/>支持主题：<a href="https://github.com/shenliyang/hexo-theme-snippet/stargazers">Star一下</a>
+</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/efinedxq" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:dangxq1008@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+	            <a href="/" rel="external nofollow" title="联系QQ" target="_blank">
+			    	<i class="qq fa fa-qq"></i>
+			    </a>
+            
+	            <a href="/" rel="external nofollow" title="微博" target="_blank">
+			    	<i class="weibo fa fa-weibo"></i>
+			    </a>
+            
+	            <a href="/" rel="external nofollow" title="QQ群" target="_blank">
+			    	<i class="users fa fa-users"></i>
+			    </a>
+            
+	            <a href="/atom.xml" rel="external nofollow" title="RSS" target="_blank">
+			    	<i class="feed fa fa-feed"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hello/"><i class="fa" aria-hidden="true">hello</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/测试/"><i class="fa" aria-hidden="true">测试</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/测试/hello/"><i class="fa" aria-hidden="true">hello</i></a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/测试/hello/java/"><i class="fa" aria-hidden="true">java</i></a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link current" href="/categories/题解/"><i class="fa" aria-hidden="true">题解</i></a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link current" href="/categories/题解/LeetCode/"><i class="fa" aria-hidden="true">LeetCode</i></a><span class="category-list-count">4</span></li></ul></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">6</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/hello/" style="font-size: 10px;">hello</a> <a href="/tags/leetcode/" style="font-size: 20px;">leetcode</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/中间数/" style="font-size: 10px;">中间数</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/数组/" style="font-size: 15px;">数组</a> <a href="/tags/最长子串/" style="font-size: 10px;">最长子串</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/链表/" style="font-size: 10px;">链表</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://blog.csdn.net/efine_dxq" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
