@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[牛客-北邮-哈夫曼树]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E5%8C%97%E9%82%AE%2F%E7%89%9B%E5%AE%A2-%E5%8C%97%E9%82%AE-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%2F</url>
+    <content type="text"><![CDATA[题目描述哈夫曼树，第一行输入一个数n，表示叶结点的个数。需要用这些叶结点生成哈夫曼树，根据哈夫曼树的概念，这些结点有权值，即weight，题目需要输出所有结点的值与权值的乘积之和。输入描述:输入有多组数据。 每组第一行输入一个数n，接着输入n个叶节点（叶节点权值不超过100，2&lt;=n&lt;=1000）。输出描述:输出权值。示例1输入51 2 2 5 9输出37 分析利用优先队列，每次找队列中最小的两个相加，之后再将和存入队列。 代码1234567891011121314151617181920212223242526272829#include &lt;iostream&gt;#include &lt;stack&gt;#include &lt;map&gt;#include &lt;vector&gt;#include &lt;queue&gt;#include &lt;algorithm&gt;using namespace std;int main()&#123; priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; Q; int n,sum =0;; cin&gt;&gt;n; for(int i = 0; i &lt; n; i ++) &#123; int t; cin&gt;&gt;t; Q.push(t); &#125; while(Q.size()&gt;1)&#123; int a,b; a = Q.top(); Q.pop(); b = Q.top(); Q.pop(); a = a+b; Q.push(a); sum += a; &#125; cout&lt;&lt;sum; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>北邮</category>
+      </categories>
+      <tags>
+        <tag>优先队列</tag>
+        <tag>哈夫曼树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[牛客-北邮-二进制]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E5%8C%97%E9%82%AE%2F%E7%89%9B%E5%AE%A2-%E5%8C%97%E9%82%AE-%E4%BA%8C%E8%BF%9B%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[题目描述大家都知道，数据在计算机里中存储是以二进制的形式存储的。 有一天，小明学了C语言之后，他想知道一个类型为unsigned int 类型的数字，存储在计算机中的二进制串是什么样子的。 你能帮帮小明吗？并且，小明不想要二进制串中前面的没有意义的0串，即要去掉前导0。 输入描述:每行有一个数字n（0&lt;=n&lt;=10^8），表示要求的二进制串。 输出描述:输出共T行。每行输出求得的二进制串。 示例1输入23输出10111 分析数学题，除留余数。注意是倒序输出，所以用了栈，也可以不用。 代码12345678910111213141516171819202122#include &lt;iostream&gt;#include &lt;stack&gt;#include &lt;algorithm&gt;using namespace std;int main()&#123; stack&lt;char&gt; s; int n,t; cin&gt;&gt;n; while(n)&#123; t = n %2; if(t) s.push('1'); else s.push('0'); n/=2; &#125; while(!s.empty())&#123; cout&lt;&lt;(s.top()); s.pop(); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>北邮</category>
+      </categories>
+      <tags>
+        <tag>二进制</tag>
+        <tag>数学</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode_problem_4_Median_of_Two_Sorted_Arrays]]></title>
     <url>%2F%E9%A2%98%E8%A7%A3%2FLeetCode%2FLeetCode-problem-4-Median-of-Two-Sorted-Arrays%2F</url>
     <content type="text"><![CDATA[问题描述There are two sorted arrays nums1 and nums2 of size m and n respectively. Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)). 找中间数字。 例子Example 1:nums1 = [1, 3]nums2 = [2]The median is 2.0 Example 2:nums1 = [1, 2]nums2 = [3, 4]The median is (2 + 3)/2 = 2.5 思路 合并两个数组，然后找到中间值。这是最笨的方法。 题目没有要求输出合并后的数组，所以没必要全部比较，可以记录比较的长度，只要达到中间长度就停止。 进一步优化，不用辅助数组，试探性查找。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243 /** * 将两者不完全合并，即只要合并到len长度即可。* 用了一个辅助vector。 68ms*/ double findMedianSortedArrays(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123; int len1 = nums1.size(), len2=nums2.size(); int len = (len1+len2)/2, f = (len1+len2)%2; vector&lt;int&gt; tem; double ans = 0; int i = 0, j= 0; while(i&lt;len1&amp;&amp;j&lt;len2&amp;&amp;i+j&lt;len+1)&#123; if(nums1[i]&gt;nums2[j])&#123; tem.push_back(nums2[j]); j++; &#125;else&#123; tem.push_back(nums1[i]); i++; &#125; cout&lt;&lt;i&lt;&lt;" "&lt;&lt;j&lt;&lt;endl; &#125; while(i+j&lt;len+1)&#123; if(i&lt;len1)&#123; tem.push_back(nums1[i]); i++; &#125; if(j&lt;len2)&#123; tem.push_back(nums2[j]); j++; &#125; cout&lt;&lt;i&lt;&lt;" "&lt;&lt;j&lt;&lt;endl; &#125; cout&lt;&lt;i&lt;&lt;" "&lt;&lt;j&lt;&lt;" "&lt;&lt;len&lt;&lt;endl; if(f&gt;0)&#123; ans = tem[len]; &#125;else&#123; ans = double(tem[len-1]+tem[len])/2; &#125; return ans; &#125; 不用vector12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758 /*** 不用vector 思路一样 但用了更长的时间 90ms*/double findMedianSortedArrays(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123; int len1 = nums1.size(), len2=nums2.size(); int len = (len1+len2)/2, f = (len1+len2)%2; double ans = 0, tem = 0; int i = 0, j= 0; while(i&lt;len1&amp;&amp;j&lt;len2&amp;&amp;i+j&lt;len+1)&#123; if(nums1[i]&gt;nums2[j])&#123; if(i+j==len-1)&#123; tem = nums2[j]; &#125; if(i+j==len)&#123; ans = nums2[j]; &#125; j++; &#125;else&#123; if(i+j==len-1)&#123; tem = nums1[i]; &#125; if(i+j==len)&#123; ans = nums1[i]; &#125; i++; &#125; cout&lt;&lt;i&lt;&lt;" "&lt;&lt;j&lt;&lt;endl; &#125; while(i+j&lt;len+1)&#123; if(i&lt;len1)&#123; if(i+j==len-1)&#123; tem = nums1[i]; &#125; if(i+j==len)&#123; ans = nums1[i]; &#125; i++; &#125; if(j&lt;len2)&#123; if(i+j==len-1)&#123; tem = nums2[j]; &#125; if(i+j==len)&#123; ans = nums2[j]; &#125; j++; &#125; cout&lt;&lt;i&lt;&lt;" "&lt;&lt;j&lt;&lt;endl; &#125; cout&lt;&lt;i&lt;&lt;" "&lt;&lt;j&lt;&lt;" "&lt;&lt;len&lt;&lt;endl; if(f&gt;0)&#123; return ans; &#125;else&#123; return (ans+tem)/2; &#125; &#125; 进一步优化123456789101112131415161718192021222324252627282930313233343536 /*** 例程，55ms**/ double findMedianSortedArrays(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123; int len1 = nums1.size(), len2=nums2.size(); if(len1&gt;len2)&#123; vector&lt;int&gt; tem = nums1; nums1 = nums2; nums2=tem; int t = len1; len1 = len2; len2 = t; &#125; int iMin = 0, iMax = len1, half = (len1+len2+1)/2; while(iMin &lt;= iMax)&#123; int i = (iMin + iMax)/2; int j = half - i; if (i &lt; iMax &amp;&amp; nums2[j-1] &gt; nums1[i])&#123; iMin = iMin + 1; // i is too small &#125; else if (i &gt; iMin &amp;&amp; nums1[i-1] &gt; nums2[j]) &#123; iMax = iMax - 1; // i is too big &#125; else &#123; // i is perfect int maxLeft = 0; if (i == 0) &#123; maxLeft =nums2[j-1]; &#125; else if (j == 0) &#123; maxLeft = nums1[i-1]; &#125; else &#123; maxLeft = max(nums1[i-1], nums2[j-1]); &#125; if ( (len1 + len2) % 2 == 1 ) &#123; return maxLeft; &#125; int minRight = 0; if (i == len1) &#123; minRight = nums2[j]; &#125; else if (j == len2) &#123; minRight = nums1[i]; &#125; else &#123; minRight = min(nums2[j], nums1[i]); &#125; return (maxLeft + minRight) / 2.0; &#125; &#125; return 0.0; &#125;]]></content>
