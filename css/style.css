@@ -267,20 +267,17 @@ pre {
 .main-header .main-header-box .branding {
   padding-top: 15px;
 }
-.main-header .main-header-box .branding h2 {
-  font-family: "STXingkai", "KaiTi", "Microsoft YaHei", "SimSun", sans-serif;
-  width: 320px;
+.main-header .main-header-box .branding h1 {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  width: 360px;
   margin: 0 auto;
   letter-spacing: 3px;
-  color: #e67e22;
+  color: #dff0d8;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  background-image: -webkit-linear-gradient(left, #cddc39, #e67e22 25%, #cddc39 50%, #e67e22 75%, #cddc39) !important;
-  -webkit-text-fill-color: transparent!important;
   -webkit-background-clip: text!important;
   background-size: 200% 100%!important;
-  animation: masked-animation 2s infinite linear !important;
 }
 .main-header .main-header-box .branding h2:hover {
   animation: masked-animation 1s infinite linear !important;
