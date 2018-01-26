@@ -1,6 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[牛客-北邮-树查找]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E5%8C%97%E9%82%AE%2F%E7%89%9B%E5%AE%A2-%E5%8C%97%E9%82%AE-%E6%A0%91%E6%9F%A5%E6%89%BE%2F</url>
+    <content type="text"><![CDATA[题目描述有一棵树，输出某一深度的所有节点，有则输出这些节点，无则输出EMPTY。该树是完全二叉树。 输入描述:输入有多组数据。每组输入一个n(1&lt;=n&lt;=1000)，然后将树中的这n个节点依次输入，再输入一个d代表深度。 输出描述:输出该树中第d层得所有节点，节点间用空格隔开，最后一个节点后没有空格。 示例1输入 41 2 3 42 输出 2 3 分析 深度为1，起点为1；深度为2，起点为2；深度为3，起点为4… 推出深度为d，起点为pow(2,d-1); 这更像一道数学规律题。 代码12345678910111213141516171819202122232425262728293031#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;queue&gt;#include &lt;cmath&gt;using namespace std;int main() &#123; int n, d; vector&lt;int&gt; num; cin&gt;&gt;n; num.push_back(0); for(int i = 0; i &lt; n; i ++) &#123; int a; cin&gt;&gt;a; num.push_back(a); &#125; cin&gt;&gt;d; if(pow(2,d-1)&gt;=num.size()) &#123; cout&lt;&lt;"EMPTY"&lt;&lt;endl; &#125; else &#123; for(int i = pow(2,d-1); i&lt;num.size()&amp;&amp;i&lt;pow(2,d); i++) &#123; cout&lt;&lt;num[i]; if(i&lt;num.size()-1&amp;&amp;i&lt;pow(2,d)-1) &#123; cout&lt;&lt;" "; &#125; else &#123; cout&lt;&lt;endl; &#125; &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>北邮</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[牛客-北邮-打牌]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E5%8C%97%E9%82%AE%2F%E7%89%9B%E5%AE%A2-%E5%8C%97%E9%82%AE-%E6%89%93%E7%89%8C%2F</url>
+    <content type="text"><![CDATA[题目描述牌只有1到9，手里拿着已经排好序的牌a，对方出牌b，用程序判断手中牌是否能够压过对方出牌。 规则：出牌牌型有5种 [1]一张 如4 则5…9可压过 [2]两张 如44 则55，66，77，…，99可压过 [3]三张 如444 规则如[2] [4]四张 如4444 规则如[2] [5]五张 牌型只有12345 23456 34567 45678 56789五个，后面的比前面的均大。 输入描述:输入有多组数据。每组输入两个字符串(字符串大小不超过100)a，b。a字符串代表手中牌，b字符串代表处的牌。 输出描述:压过输出YES 否则NO。 示例1输入 1223344556667733 输出 YES 分析按照规则，分为两种况:一种是顺子，一种就是重复。 顺子时候。先将a串去重复。然后再初步判断第一张牌是否大于，大于时，再比较后四张牌。 重复。判断第一张牌是否大于，大于时，再比较b.length()长度的牌。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;queue&gt;using namespace std;int main()&#123; string a, b, c; bool flags = false; cin&gt;&gt;a&gt;&gt;b; if(b.length()&lt;5&amp;&amp;b.length()&gt;0) &#123; for(int i = 0; i &lt; a.length()-b.length()+1;i ++)&#123; if(a[i]&gt;b[0])&#123; for(int j = i; j &lt;= i+b.length()-1; j ++)&#123; if(a[j]&gt;b[0]&amp;&amp;a[j]==a[i])&#123; flags = true; &#125;else &#123; flags = false; break; &#125; &#125; if(flags) break; &#125; &#125; &#125;else&#123; for(int i = 1;i &lt; a.length(); i ++)&#123; if(a[i]==a[i-1])&#123; a.erase(i,1); i--; &#125; &#125; for(int i = 0; i &lt; a.length(); i ++)&#123; if(a[i]&gt;b[0])&#123; for(int j = 1; j &lt; b.length(); j ++)&#123; if(a[i+j]&gt;b[j]&amp;&amp;a[i+j]-a[i+j-1]==1)&#123; flags = true; &#125; else &#123; flags = false; break; &#125; &#125; &#125; if(flags) break; &#125; &#125; if(flags) cout&lt;&lt;"YES"; else cout&lt;&lt;"NO"; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>北邮</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[牛客-北邮-C反转]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E5%8C%97%E9%82%AE%2F%E7%89%9B%E5%AE%A2-%E5%8C%97%E9%82%AE-C%E5%8F%8D%E8%BD%AC%2F</url>
+    <content type="text"><![CDATA[题目描述首先输入一个5 * 5的数组，然后输入一行，这一行有四个数，前两个代表操作类型，后两个数x y代表需操作数据为以x y为左上角的那几个数据。 操作类型有四种： 1 2 表示：90度，顺时针，翻转4个数 1 3 表示：90度，顺时针，翻转9个数 2 2 表示：90度，逆时针，翻转4个数 2 3 表示：90度，逆时针，翻转9个数 输入描述:输入有多组数据。每组输入一个5 * 5的数组，然后输入一行，这一行有四个数，前两个代表操作类型，后两个数x y代表需操作数据为以x y为左上角的那几个数据。 输出描述:输出翻转后的数组。 示例1输入 1 2 3 4 56 7 8 9 1011 12 13 14 1516 17 18 19 2021 22 23 24 251 3 1 1 输出 11 6 1 4 512 7 2 9 1013 8 3 14 1516 17 18 19 2021 22 23 24 25 分析用的方法比较笨，比较暴力，挨个交换。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;queue&gt;using namespace std;int main()&#123; int num[6][6], n, m, x, y; for(int i = 1; i &lt;=5; i ++ ) for(int j = 1; j &lt;= 5; j ++) cin&gt;&gt;num[i][j]; cin&gt;&gt;n&gt;&gt;m&gt;&gt;x&gt;&gt;y; if(n==1&amp;&amp;m==2)&#123; int tem = num[x][y]; num[x][y] = num[x+1][y]; num[x+1][y] = num[x+1][y+1]; num[x+1][y+1] = num[x][y+1]; num[x][y+1] = tem; &#125;else if(n==1&amp;&amp;m==3)&#123; int tem = num[x][y]; num[x][y] = num[x+2][y]; num[x+2][y] = num[x+2][y+2]; num[x+2][y+2] = num[x][y+2]; num[x][y+2] = tem; tem = num[x][y+1]; num[x][y+1] = num[x+1][y]; num[x+1][y] = num[x+2][y+1]; num[x+2][y+1] = num[x+1][y+2]; num[x+1][y+2] = tem; &#125;else if(n==2&amp;&amp;m==2)&#123; int tem = num[x][y]; num[x][y] = num[x][y+1]; num[x][y+1] = num[x+1][y+1]; num[x+1][y+1] = num[x+1][y]; num[x+1][y] = tem; &#125;else if(n==2&amp;&amp;m==3)&#123; int tem = num[x][y]; num[x][y] = num[x][y+2]; num[x][y+2] = num[x+2][y+2]; num[x+2][y+2] = num[x+2][y]; num[x+2][y] = tem; tem = num[x][y+1]; num[x][y+1] = num[x+1][y+2]; num[x+1][y+2] = num[x+2][y+1]; num[x+2][y+1] = num[x+1][y]; num[x+1][y] = tem; &#125; for(int i = 1; i &lt;= 5;i ++)&#123; for(int j = 1; j &lt;= 5; j ++)&#123; cout&lt;&lt;num[i][j]; if(j==5) cout&lt;&lt;endl; else cout&lt;&lt;" "; &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>北邮</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[牛客-北邮-矩阵幂]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E5%8C%97%E9%82%AE%2F%E7%89%9B%E5%AE%A2-%E5%8C%97%E9%82%AE-%E7%9F%A9%E9%98%B5%E5%B9%82%2F</url>
+    <content type="text"><![CDATA[题目描述给定一个n*n的矩阵，求该矩阵的k次幂，即P^k。 输入描述:第一行：两个整数n（2&lt;=n&lt;=10）、k（1&lt;=k&lt;=5），两个数字之间用一个空格隔开，含义如上所示。接下来有n行，每行n个正整数，其中，第i行第j个整数表示矩阵中第i行第j列的矩阵元素Pij且（0&lt;=Pij&lt;=10）。另外，数据保证最后结果不会超过10^8。 输出描述:对于每组测试数据，输出其结果。格式为：n行n列个整数，每行数之间用空格隔开，注意，每行最后一个数后面不应该有多余的空格。 示例1输入 2 29 89 3输出153 96108 81 分析矩阵相乘，第i行乘以j列 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include &lt;iostream&gt;#include &lt;stack&gt;#include &lt;map&gt;#include &lt;vector&gt;#include &lt;queue&gt;#include &lt;algorithm&gt;using namespace std;/*** 矩阵相乘，第a行乘以b列*/int solut(int tem[10][10], int num[10][10], int a, int b, int n) &#123; int ans = 0; for(int i = 0; i &lt; n; i ++) &#123; ans += tem[a][i]*num[i][b]; &#125; return ans;&#125;int main() &#123; int n, m,num[10][10],tem[10][10],ans[10][10]; cin&gt;&gt;n&gt;&gt;m; for(int i = 0; i &lt; n; i ++) for(int j = 0; j &lt; n; j++) &#123; cin&gt;&gt;num[i][j]; ans[i][j] = num[i][j]; &#125; //计算 for(int i = 1; i &lt; m; i ++) &#123; for(int j = 0; j &lt; n; j ++)&#123; for(int k = 0;k &lt; n; k ++)&#123; tem[j][k] = ans[j][k]; &#125; &#125; //矩阵相乘 for(int j = 0; j &lt; n; j ++) &#123; for(int k = 0; k &lt; n; k ++) &#123; ans[j][k] = solut(tem,num,j,k,n); &#125; &#125; &#125; //输出 for(int i = 0; i &lt; n; i++) &#123; for(int j = 0; j &lt; n; j++) &#123; cout&lt;&lt;ans[i][j]; if(j==n-1) &#123; cout&lt;&lt;endl; &#125; else &#123; cout&lt;&lt;" "; &#125; &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>北邮</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>矩阵</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[牛客-北邮-查找第K小数]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E5%8C%97%E9%82%AE%2F%E7%89%9B%E5%AE%A2-%E5%8C%97%E9%82%AE-%E6%9F%A5%E6%89%BE%E7%AC%ACK%E5%B0%8F%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[题目描述查找一个数组的第K小的数，注意同样大小算一样大。 如 2 1 3 4 5 2 第三小数为3。 输入描述:输入有多组数据。每组输入n，然后输入n个整数(1&lt;=n&lt;=1000)，再输入k。 输出描述:输出第k小的整数。 示例1输入 62 1 3 5 2 23输出3 分析先排序，然后遍历数组计数查找。 代码123456789101112131415161718192021222324252627282930313233#include &lt;iostream&gt;#include &lt;stack&gt;#include &lt;map&gt;#include &lt;vector&gt;#include &lt;queue&gt;#include &lt;algorithm&gt;using namespace std;int main()&#123; int n, m,num[1000],cnt=1,ans; cin&gt;&gt;n; for(int i = 0; i &lt; n; i ++) &#123; cin&gt;&gt;num[i]; &#125; cin&gt;&gt;m; sort(num,num+n); if(m==1) &#123; cout&lt;&lt;num[0]; &#125; else for(int i = 1; i &lt; n; i ++) &#123; if(num[i]!=num[i-1]) cnt++; if(cnt==m) &#123; cout&lt;&lt;num[i]; break; &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>北邮</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>排序</tag>
+        <tag>查找</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[牛客-北邮-比较奇偶数个数]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E5%8C%97%E9%82%AE%2F%E7%89%9B%E5%AE%A2-%E5%8C%97%E9%82%AE-%E6%AF%94%E8%BE%83%E5%A5%87%E5%81%B6%E6%95%B0%E4%B8%AA%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[题目描述第一行输入一个数，为n，第二行输入n个数，这n个数中，如果偶数比奇数多，输出NO，否则输出YES。 输入描述:输入有多组数据。每组输入n，然后输入n个整数（1&lt;=n&lt;=1000）。 输出描述:如果偶数比奇数多，输出NO，否则输出YES。 示例1输入 51 5 2 4 3输出YES 分析遍历数组，偶数与奇数分别判断计数。然后做比较。 代码123456789101112131415161718192021222324#include &lt;iostream&gt;#include &lt;stack&gt;#include &lt;map&gt;#include &lt;vector&gt;#include &lt;queue&gt;#include &lt;algorithm&gt;using namespace std;int main()&#123; int n,t, num1=0, num2=0; cin&gt;&gt;n; while(n--) &#123; cin&gt;&gt;t; if(t&amp;1) num1++; else num2++; &#125; if(num1&lt;num2)&#123; cout&lt;&lt;"NO"; &#125;else&#123; cout&lt;&lt;"YES"; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>北邮</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[牛客-北邮-哈夫曼树]]></title>
     <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E5%8C%97%E9%82%AE%2F%E7%89%9B%E5%AE%A2-%E5%8C%97%E9%82%AE-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%2F</url>
     <content type="text"><![CDATA[题目描述哈夫曼树，第一行输入一个数n，表示叶结点的个数。需要用这些叶结点生成哈夫曼树，根据哈夫曼树的概念，这些结点有权值，即weight，题目需要输出所有结点的值与权值的乘积之和。 输入描述:输入有多组数据。每组第一行输入一个数n，接着输入n个叶节点（叶节点权值不超过100，2&lt;=n&lt;=1000）。 输出描述:输出权值。 示例1输入 51 2 2 5 9 输出 37 分析利用优先队列，每次找队列中最小的两个相加，之后再将和存入队列。 代码1234567891011121314151617181920212223242526272829#include &lt;iostream&gt;#include &lt;stack&gt;#include &lt;map&gt;#include &lt;vector&gt;#include &lt;queue&gt;#include &lt;algorithm&gt;using namespace std;int main()&#123; priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; Q; int n,sum =0;; cin&gt;&gt;n; for(int i = 0; i &lt; n; i ++) &#123; int t; cin&gt;&gt;t; Q.push(t); &#125; while(Q.size()&gt;1)&#123; int a,b; a = Q.top(); Q.pop(); b = Q.top(); Q.pop(); a = a+b; Q.push(a); sum += a; &#125; cout&lt;&lt;sum; return 0;&#125;]]></content>
@@ -24,8 +108,8 @@
         <category>北邮</category>
       </categories>
       <tags>
-        <tag>二进制</tag>
         <tag>数学</tag>
+        <tag>二进制</tag>
         <tag>栈</tag>
       </tags>
   </entry>
