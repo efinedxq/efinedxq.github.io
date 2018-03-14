@@ -1,6 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[清华-10-二叉树遍历]]></title>
+    <url>%2Funcategorized%2F%E6%B8%85%E5%8D%8E-10-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[清华-09-球的半径和体积]]></title>
+    <url>%2Funcategorized%2F%E6%B8%85%E5%8D%8E-09-%E7%90%83%E7%9A%84%E5%8D%8A%E5%BE%84%E5%92%8C%E4%BD%93%E7%A7%AF%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[清华-08-成绩排序]]></title>
+    <url>%2Funcategorized%2F%E6%B8%85%E5%8D%8E-08-%E6%88%90%E7%BB%A9%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[清华-07-整数拆分]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E6%B8%85%E5%8D%8E%2F%E6%B8%85%E5%8D%8E-07-%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86%2F</url>
+    <content type="text"><![CDATA[题目描述一个整数总可以拆分为2的幂的和，例如： 7=1+2+4 7=1+2+2+2 7=1+1+1+4 7=1+1+1+2+2 7=1+1+1+1+1+2 7=1+1+1+1+1+1+1 总共有六种不同的拆分方式。 再比如：4可以拆分成：4 = 4，4 = 1 + 1 + 1 + 1，4 = 2 + 2，4=1+1+2。 用f(n)表示n的不同拆分的种数，例如f(7)=6. 要求编写程序，读入n(不超过1000000)，输出f(n)%1000000000。 输入描述:每组输入包括一个整数：N(1&lt;=N&lt;=1000000)。 输出描述:对于每组数据，输出f(n)%1000000000。 示例1输入 7输出6 分析把数都提前算出来，之后直接输出答案。有规律，如果是奇数，那么前一个数是偶数，偶数的组合方式 代码12345678910111213//很讨巧，为啥是这样？void init(int dp[],int len)&#123; dp[0]=0;dp[1]=1;dp[2]=2; for(int i = 3; i &lt;= len; i ++) &#123; dp[i] = 0; //奇数 if(i&amp;1) &#123; dp[i] = (dp[i-1])%1000000000; &#125; else &#123; //偶数 dp[i] = (dp[i-1]+dp[i/2])%1000000000; &#125; &#125;&#125; 1234567891011121314151617181920//果然运行超时void dfs(int n, int sum,int i,int len, int &amp;cnt)&#123; if(sum==n)&#123; cnt=(cnt+1)%1000000000; return ; &#125; for(; i &lt;= len; i ++)&#123; if(sum+pow(2,i)&gt;n) return ; sum+=pow(2,i); dfs(n,sum,i,n-pow(2,i),cnt); sum-=pow(2,i); &#125;&#125;int solution(int n)&#123; int ans =0; dfs(n,0,0,n,ans); return ans;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>清华</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[清华-06-手机键盘]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E6%B8%85%E5%8D%8E%2F%E6%B8%85%E5%8D%8E-06-%E6%89%8B%E6%9C%BA%E9%94%AE%E7%9B%98%2F</url>
+    <content type="text"><![CDATA[题目描述按照手机键盘输入字母的方式，计算所花费的时间 如：a,b,c都在“1”键上，输入a只需要按一次，输入c需要连续按三次。 如果连续两个字符不在同一个按键上，则可直接按，如：ad需要按两下，kz需要按6下 如果连续两字符在同一个按键上，则两个按键之间需要等一段时间，如ac，在按了a之后，需要等一会儿才能按c。 现在假设每按一次需要花费一个时间段，等待时间需要花费两个时间段。 现在给出一串字符，需要计算出它所需要花费的时间。 输入描述:一个长度不大于100的字符串，其中只有手机按键上有的小写字母 输出描述:输入可能包括多组数据，对于每组数据，输出按出Input所给字符串所需要的时间 示例1输入 bobwww 输出 77 分析： 记录下上次是哪个按键。 找到该字母在按键的哪个位置。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859//好笨的方法。int solution(string s) &#123; int preK = 0, ans = 0; for(int i = 0; i &lt; s.length(); i ++) &#123; if(s[i]&gt;='a'&amp;&amp;s[i]&lt;='c') &#123; if(preK==2) ans+=2; if(s[i]=='a') ans++; else if(s[i]=='b') ans +=2; else ans+=3; preK = 2; &#125; else if(s[i]&gt;='d'&amp;&amp;s[i]&lt;='f') &#123; if(preK==3) ans+=2; if(s[i]=='d') ans++; else if(s[i]=='e') ans +=2; else ans+=3; preK = 3; &#125; else if(s[i]&gt;='g'&amp;&amp;s[i]&lt;='i') &#123; if(preK==4) ans+=2; if(s[i]=='g') ans++; else if(s[i]=='h') ans +=2; else ans+=3; preK = 4; &#125; else if(s[i]&gt;='j'&amp;&amp;s[i]&lt;='l') &#123; if(preK==5) ans+=2; if(s[i]=='j') ans++; else if(s[i]=='k') ans +=2; else ans+=3; preK = 5; &#125; else if(s[i]&gt;='m'&amp;&amp;s[i]&lt;='o') &#123; if(preK==6) ans+=2; if(s[i]=='m') ans++; else if(s[i]=='n') ans +=2; else ans+=3; preK = 6; &#125; else if(s[i]&gt;='p'&amp;&amp;s[i]&lt;='s') &#123; if(preK==7) ans+=2; if(s[i]=='p') ans++; else if(s[i]=='q') ans +=2; else if(s[i]=='r') ans +=3; else ans+=4; preK = 7; &#125; else if(s[i]&gt;='t'&amp;&amp;s[i]&lt;='v') &#123; if(preK==8) ans+=2; if(s[i]=='t') ans++; else if(s[i]=='u') ans +=2; else ans+=3; preK = 8; &#125; else &#123; if(preK==9) ans+=2; if(s[i]=='w') ans++; else if(s[i]=='x') ans +=2; else if(s[i]=='y') ans +=3; else ans+=4; preK = 9; &#125; &#125; return ans;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>清华</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+        <tag>枚举</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[清华-05-质因数的个数]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E6%B8%85%E5%8D%8E%2F%E6%B8%85%E5%8D%8E-05-%E8%B4%A8%E5%9B%A0%E6%95%B0%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[题目描述求正整数N(N&gt;1)的质因数的个数。 相同的质因数需要重复计算。如120=22235，共有5个质因数。 输入描述:可能有多组测试数据，每组测试数据的输入是一个正整数N，(1&lt;N&lt;10^9)。 输出描述:对于每组数据，输出N的质因数的个数。 示例1输入120输出5 分析质因数的个数。首先看到数据是正数范围内，所以不考虑大数问题。在处理质因数的时候，一个质因数可能出现多次，所以把一个质因数消完再找下一个。 代码 未处理，超时 1234567891011121314//超时int solution(int n) &#123; int ans = 0; while(n!=1)&#123; for(int i = 2; i &lt;= n; i ++)&#123; if(n%i==0)&#123; ans++; n /= i; break; &#125; &#125; &#125; return ans;&#125; 修改后 12345678910111213//通过int solution(int n) &#123; int ans = 0; for(int i = 2; i &lt;= sqrt(n); i ++) &#123; while(n%i==0) &#123; n=n/i; ans++; &#125; if(n&lt;=1) break; &#125; if(n&gt;1) ans++; return ans;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>清华</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>质因数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[清华-04-反序输出]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E6%B8%85%E5%8D%8E%2F%E6%B8%85%E5%8D%8E-04-%E5%8F%8D%E5%BA%8F%E8%BE%93%E5%87%BA%2F</url>
+    <content type="text"><![CDATA[题目描述输入任意4个字符(如：abcd)， 并按反序输出(如：dcba) 输入描述:题目可能包含多组用例，每组用例占一行，包含4个任意的字符。 输出描述:对于每组输入,请输出一行反序后的字符串。具体可见样例。 示例1输入 UpincvYjWJpwcXOA 输出 nipUjYvcwpJWAOXc 分析代码1只是为了AC，并没有实质性的将字符串反转过来。代码2，是临时写的，没有测试。 代码 没有实质反转 123456void solution(string s)&#123; for(int i = s.length()-1;i&gt;=0; i --)&#123; cout&lt;&lt;s[i]; &#125; cout&lt;&lt;endl;&#125; 反转12345void solution(string s)&#123; for(int i = s.length()-1, j=0;j&lt;i; i --,j++)&#123; swap(s[i],s[j]); &#125;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>清华</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+        <tag>反序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[清华-03-代理服务器]]></title>
+    <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E6%B8%85%E5%8D%8E%2F%E6%B8%85%E5%8D%8E-03-%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[题目描述使用代理服务器能够在一定程度上隐藏客户端信息，从而保护用户在互联网上的隐私。我们知道n个代理服务器的IP地址，现在要用它们去访问m个服务器。这 m 个服务器的 IP 地址和访问顺序也已经给出。系统在同一时刻只能使用一个代理服务器，并要求不能用代理服务器去访问和它 IP地址相同的服务器（不然客户端信息很有可能就会被泄露）。在这样的条件下，找到一种使用代理服务器的方案，使得代理服务器切换的次数尽可能得少。 输入描述: 每个测试数据包括 n + m + 2 行。 第 1 行只包含一个整数 n，表示代理服务器的个数。 第 2行至第n + 1行每行是一个字符串，表示代理服务器的 IP地址。这n个 IP地址两两不相同。 第 n + 2 行只包含一个整数 m，表示要访问的服务器的个数。 第 n + 3 行至第 n + m + 2 行每行是一个字符串，表示要访问的服务器的 IP 地址，按照访问的顺序给出。 每个字符串都是合法的IP地址，形式为“xxx.yyy.zzz.www”，其中任何一部分均是0–255之间的整数。输入数据的任何一行都不包含空格字符。 其中，1&lt;=n&lt;=1000，1&lt;=m&lt;=5000。 输出描述:可能有多组测试数据，对于每组输入数据， 输出数据只有一行，包含一个整数s，表示按照要求访问服务器的过程中切换代理服务器的最少次数。第一次使用的代理服务器不计入切换次数中。若没有符合要求的安排方式，则输出-1。 示例1输入 3166.111.4.100162.105.131.113202.112.128.69672.14.235.104166.111.4.100207.46.19.190202.112.128.69162.105.131.113118.214.226.52 输出 1 分析枚举，每次找到能达到要求最长的代理IP，并记下这时服务IP位置，作为下一次搜索的开始，如此反复枚举，直到遍历完服务IP为止。其中注意点，n为1且不能达到要求时，返回-1；达到最后一个服务IP时返回0。 代码1234567891011121314int solution(int n, string pox[], int m, string svr[])&#123; int len = -1; for(int i = 0,j; i &lt; n; i ++)&#123; for(j = 0; j &lt; m; j ++)&#123; if(pox[i]==svr[j])&#123; len = j &gt; len?j:len; break; &#125; &#125; if(j==m) return 0; &#125; if(n==1&amp;&amp;len!=-1) return -1; return 1+solution(n,pox,m-len,svr+len);&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>牛客</category>
+        <category>清华</category>
+      </categories>
+      <tags>
+        <tag>枚举</tag>
+        <tag>递归</tag>
+        <tag>暴力</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[牛客-清华-02-约数的个数]]></title>
     <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E6%B8%85%E5%8D%8E%2F%E7%89%9B%E5%AE%A2-%E6%B8%85%E5%8D%8E-02-%E7%BA%A6%E6%95%B0%E7%9A%84%E4%B8%AA%E6%95%B0%2F</url>
     <content type="text"><![CDATA[题目描述输入n个整数,依次输出每个数的约数的个数 输入描述:输入的第一行为N，即数组的个数(N&lt;=1000)接下来的1行包括N个整数，其中每个数的范围为(1&lt;=Num&lt;=1000000000)当N=0时输入结束。 输出描述:可能有多组输入数据，对于每组输入数据，输出N行，其中每一行对应上面的一个数的约数的个数。 示例1输入 51 3 4 6 12 输出 12346 代码12345678910111213141516171819202122#include &lt;iostream&gt;#include &lt;cmath&gt;using namespace std;int main() &#123; int n, m; while(cin&gt;&gt;n) &#123; while(n--) &#123; int cnt = 0; cin&gt;&gt;m; for(int i = 1; i &lt;= sqrt(m); i++) &#123; int a = m%i; if(a==0) &#123; if(i*i==m) cnt++; else cnt+=2; &#125; &#125; cout&lt;&lt;cnt&lt;&lt;endl; &#125; &#125; return 0;&#125; 其中循环部分还可以这么写 1234567cin&gt;&gt;m;for(i = 1; i*i &lt; m; i++) &#123; if(m%i==0) &#123; cnt+=2; &#125;&#125;if(i*i==m) cnt++;]]></content>
@@ -25,22 +111,22 @@
         <category>清华</category>
       </categories>
       <tags>
-        <tag>结构体</tag>
         <tag>排序</tag>
+        <tag>结构体</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[牛客-北邮-复数集合]]></title>
     <url>%2F%E9%A2%98%E8%A7%A3%2F%E7%89%9B%E5%AE%A2%2F%E5%8C%97%E9%82%AE%2F%E7%89%9B%E5%AE%A2-%E5%8C%97%E9%82%AE-%E5%A4%8D%E6%95%B0%E9%9B%86%E5%90%88%2F</url>
-    <content type="text"><![CDATA[题目描述一个复数（x+iy）集合，两种操作作用在该集合上： 1、Pop 表示读出集合中复数模值最大的那个复数，如集合为空 输出 empty ，不为空就输出最大的那个复数并且从集合中删除那个复数，再输出集合的大小SIZE； 2 Insert a+ib 指令（a，b表示实部和虚部），将a+ib加入到集合中 ，输出集合的大小SIZE； 最开始要读入一个int n，表示接下来的n行每一行都是一条命令。 输入描述:输入有多组数据。每组输入一个n(1&lt;=n&lt;=1000)，然后再输入n条指令。 输出描述:根据指令输出结果。模相等的输出b较小的复数。a和b都是非负数。 示例1输入 3PopInsert 1+i2Pop 输出 emptySIZE = 11+i2SIZE = 0 分许处理字符串，关于字符串，cstring 和 string 是不一样的。用cin输入的字符串，就要用string库函数，输出也要用cout，是对应的；不然会出错。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;queue&gt;#include &lt;cmath&gt;#include &lt;set&gt;#include &lt;cstdio&gt;#include &lt;string&gt;using namespace std;class Node&#123; public: int a; int b; float mode; public: bool operator&lt;(const Node&amp; rhs) const&#123; return this-&gt;mode&lt;rhs.mode; &#125;&#125;;int main() &#123; int n; string t, c; priority_queue&lt;Node&gt; numQ; cin&gt;&gt;n; while(n--)&#123; cin&gt;&gt;t; if(!t.compare("Pop"))&#123; if(numQ.empty())&#123; cout&lt;&lt;"empty"&lt;&lt;endl; &#125;else&#123; Node num = numQ.top(); numQ.pop(); cout&lt;&lt;num.a&lt;&lt;"+i"&lt;&lt;num.b&lt;&lt;endl; cout&lt;&lt;"SIZE = "&lt;&lt;numQ.size()&lt;&lt;endl; &#125; &#125;else&#123; Node num; int a =0, b =0; scanf("%d+i%d",&amp;a,&amp;b); num.a = a; num.b = b; num.mode = sqrt(a*a+b*b); numQ.push(num); cout&lt;&lt;"SIZE = "&lt;&lt;numQ.size()&lt;&lt;endl; &#125; &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[题目描述一个复数（x+iy）集合，两种操作作用在该集合上： 1、Pop 表示读出集合中复数模值最大的那个复数，如集合为空 输出 empty ，不为空就输出最大的那个复数并且从集合中删除那个复数，再输出集合的大小SIZE； 2 Insert a+ib 指令（a，b表示实部和虚部），将a+ib加入到集合中 ，输出集合的大小SIZE； 最开始要读入一个int n，表示接下来的n行每一行都是一条命令。 输入描述:输入有多组数据。每组输入一个n(1&lt;=n&lt;=1000)，然后再输入n条指令。 输出描述:根据指令输出结果。模相等的输出b较小的复数。a和b都是非负数。 示例1输入 3PopInsert 1+i2Pop 输出 emptySIZE = 11+i2SIZE = 0 分析处理字符串，关于字符串，cstring 和 string 是不一样的。用cin输入的字符串，就要用string库函数，输出也要用cout，是对应的；不然会出错。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;queue&gt;#include &lt;cmath&gt;#include &lt;set&gt;#include &lt;cstdio&gt;#include &lt;string&gt;using namespace std;class Node&#123; public: int a; int b; float mode; public: bool operator&lt;(const Node&amp; rhs) const&#123; return this-&gt;mode&lt;rhs.mode; &#125;&#125;;int main() &#123; int n; string t, c; priority_queue&lt;Node&gt; numQ; cin&gt;&gt;n; while(n--)&#123; cin&gt;&gt;t; if(!t.compare("Pop"))&#123; if(numQ.empty())&#123; cout&lt;&lt;"empty"&lt;&lt;endl; &#125;else&#123; Node num = numQ.top(); numQ.pop(); cout&lt;&lt;num.a&lt;&lt;"+i"&lt;&lt;num.b&lt;&lt;endl; cout&lt;&lt;"SIZE = "&lt;&lt;numQ.size()&lt;&lt;endl; &#125; &#125;else&#123; Node num; int a =0, b =0; scanf("%d+i%d",&amp;a,&amp;b); num.a = a; num.b = b; num.mode = sqrt(a*a+b*b); numQ.push(num); cout&lt;&lt;"SIZE = "&lt;&lt;numQ.size()&lt;&lt;endl; &#125; &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
         <category>牛客</category>
         <category>北邮</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>优先队列</tag>
+        <tag>数学</tag>
         <tag>复数</tag>
         <tag>类排序</tag>
       </tags>
@@ -211,8 +297,8 @@
         <category>北邮</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>二进制</tag>
+        <tag>数学</tag>
         <tag>栈</tag>
       </tags>
   </entry>
